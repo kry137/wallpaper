@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.viewport-full {
+    width: 100vw;
+    height: 100vh;
+}
+
+.three-d {
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%; /* default, pusat tengah elemen */
+    width: fit-content;
+}
+
+.floating {
+    animation: floating 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}

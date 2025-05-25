@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enchanted Book</title>
+  <style>
+    :root {
+      --scale: 200;
+    }
+
+    body {
+      margin: 0;
+      background: #111;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 800px;
+    }
+
+    .scene {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      transform-style: preserve-3d;
+      /* animation: spin 10s infinite linear; */
+    }
+
+    .face {
+      transform-origin: center center;
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(0, 200, 255, 0.7);
+      /* border: 1px solid #fff; */
+      image-rendering: pixelated;
+    }
+
+    .front {
+      transform: translateZ(100px);
+    }
+
+    .back {
+      transform: rotateY(180deg) translateZ(100px);
+    }
+
+    .right {
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .left {
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .top {
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .bottom {
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+
+      to {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../Public/v2.0/style.css">
+</head>
+
+<body>
+  <!-- <div class="scene rotate-mouse threed-parent" rm-intensity-x="0.1" rm-intensity-y="0.1">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div> -->
+  <div class="scene rotate-mouse threed-parent" rm-intensity-x="0.1" rm-intensity-y="0.1">
+    <div class="face" style="background: url(enchanting_table_book.1.png); width: 60px; height: 100px; background-position: 0px 0px; background-size: 6px 10px; background-repeat: no-repeat; transform: translate(-40px, -60px) rotateX(90deg) rotateY(270deg);"></div>
+    <div class="face" style="background: url(enchanting_table_book.4.png); width: 20px; height: 60px; background-position: 0px 0px; background-size: cover; transform: translate(-10px, -40px) rotateX(0deg) rotateY(0deg);"></div>
+
+  </div>
+</body>
+<script>const DEBUG = true;</script>
+<script src="../Public/v2.0/public.js"></script>
+<script src="../Public/v2.0/rotate-mouse.js"></script>
+
+</html>

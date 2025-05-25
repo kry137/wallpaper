@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enchanting Table</title>
+    <link rel="stylesheet" href="Public/style.v1.1.css">
+    <style>
+        :root {
+            --scale: 30;
+            --rotation-time: 35;
+        }
+
+        /* body {
+            margin: 0;
+            background: #111;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 800px;
+        } */
+
+        #hover{
+            position: relative;
+            z-index: 1;
+            width: calc(17px * var(--scale));
+            height: calc(17px * var(--scale)); 
+            /* transform: translateY(-7vh); */
+            /* background-color: rgb(255, 0, 0, 0.2); */
+        }
+
+        #book {
+            width: calc(2px * var(--scale));
+            height: calc(8px * var(--scale));
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 8000px;
+            animation-fill-mode: forwards !important;
+            transition: all 0.3s ease 0s;
+
+        }
+        #book>* {
+            animation: floating 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        #left-page {
+            /* animation: openleft 1s ease; */
+            /* animation-fill-mode: forwards !important; */
+            transition: all 0.3s ease;
+            transform-origin: calc(0.5px * var(--scale)) calc(4.73px * var(--scale));
+        }
+        #right-page {
+            /* animation: openright 1s ease; */
+            /* animation-fill-mode: forwards !important; */
+            transition: all 0.3s ease;
+            transform-origin: calc(1.33px * var(--scale)) calc(4.66px * var(--scale));
+        }
+        @keyframes openleft{
+            from {
+                transform: rotateZ(00deg);
+            }
+            to{
+                transform: rotateZ(-75deg);
+            }
+        }
+        @keyframes openright{
+            from {
+                transform: rotateZ(00deg);
+            }
+            to{
+                transform: rotateZ(75deg);
+            }
+        }
+
+        .spin {
+            animation: spin calc(var(--rotation-time) * 1s) infinite linear;
+        }
+
+        .face {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            image-rendering: pixelated;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 200, 255, 0.7);
+            /* border: 1px solid #fff; */
+        }
+
+        .front {
+            transform: translateZ(10px);
+            width: 2px;
+            height: 8px;
+            background: url(enchanting_table_book.png);
+            background-position: -24px -10px;
+        }
+
+        .back {
+            transform: rotateY(180deg) translateZ(10px);
+        }
+
+        .right {
+            transform: rotateY(90deg) translateZ(10px);
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(10px);
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(10px);
+        }
+
+        .bottom {
+            transform: rotateX(-90deg) translateZ(10px);
+            /* width: 50px;
+            height: 50px;
+            background: url(enchanting_table_book.png); */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+            50% {
+                transform: rotateX(-20deg) rotateY(-360deg) rotateZ(0deg);
+            }
+
+            100% {
+                transform: rotateX(-20deg) rotateY(-720deg) rotateZ(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hover" class="repos" rpos-x="50vw" rpos-y="40vh"> </div>
+    
+    <img src="./images/background.png" class="absolute viewport-full">
+    <div id="book" class="spin repos rotate-mouse threed-parent" rpos-x="50vw" rpos-y="40vh" rm-intensity-x="0.01" rm-intensity-y="0.01">
+        <div class="container three-d">
+            <div id="left-page" class="three-d">
+                <div class="face" style="background: url(./images/enchanting_table_book_01.png); width: calc(6px * var(--scale)); height: calc(10px * var(--scale)); background-size: cover; transform: translate3d(calc(-3px * var(--scale)), calc(-3px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(270deg);"> </div>
+                
+                <div class="face" style="background: url(./images/enchanting_table_book_05.png); width: calc(1px * var(--scale)); height: calc(5px * var(--scale)); background-size: cover; transform: translate3d(calc(0px * var(--scale)), calc(0px * var(--scale)), calc(4px * var(--scale))) rotateX(0deg) rotateY(0deg);"> </div>
+                
+                <div class="face" style="background: url(./images/enchanting_table_book_06.png); width: calc(1px * var(--scale)); height: calc(5px * var(--scale)); background-size: cover; transform: translate3d(calc(0px * var(--scale)), calc(0px * var(--scale)), calc(-4px * var(--scale))) rotateX(0deg) rotateY(0deg);"> </div>
+                
+                <div class="face" style="background: url(./images/enchanting_table_book_03.png); width: calc(1px * var(--scale)); height: calc(8px * var(--scale)); background-size: cover; transform: translate3d(calc(0px * var(--scale)), calc(-4px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(0deg);"> </div>
+                
+                <div class="face" style="background: url(./images/enchanting_table_book_08.png); width: calc(5px * var(--scale)); height: calc(8px * var(--scale)); background-size: cover; transform: translate3d(calc(-1.5px * var(--scale)), calc(-1.5px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(270deg);"> </div>
+                
+                <div class="face" style="background: url(./images/enchanting_table_book_02.png); width: calc(1px * var(--scale)); height: calc(10px * var(--scale)); background-size: cover; transform: translate3d(calc(0px * var(--scale)), calc(0px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(0deg);"> </div>
+            </div>
+            
+            <div id="right-page" class="three-d">
+                <div class="face" style="background: url(./images/enchanting_table_book_01.png); width: calc(6px * var(--scale)); height: calc(10px * var(--scale)); background-size: cover; transform: translate3d(calc(-1px * var(--scale)), calc(-3px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(270deg);"> </div>
+
+                <div class="face" style="background: url(./images/enchanting_table_book_06.png); width: calc(1px * var(--scale)); height: calc(5px * var(--scale)); background-size: cover; transform: translate3d(calc(1px * var(--scale)), calc(0px * var(--scale)), calc(4px * var(--scale))) rotateX(0deg) rotateY(0deg);"> </div>
+
+                <div class="face" style="background: url(./images/enchanting_table_book_04.png); width: calc(1px * var(--scale)); height: calc(8px * var(--scale)); background-size: cover; transform: translate3d(calc(1px * var(--scale)), calc(-4px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(0deg);"> </div>
+
+                <div class="face" style="background: url(./images/enchanting_table_book_05.png); width: calc(1px * var(--scale)); height: calc(5px * var(--scale)); background-size: cover; transform: translate3d(calc(1px * var(--scale)), calc(0px * var(--scale)), calc(-4px * var(--scale))) rotateX(0deg) rotateY(0deg);"> </div>
+
+                <div class="face" style="background: url(./images/enchanting_table_book_09.png); width: calc(5px * var(--scale)); height: calc(8px * var(--scale)); background-size: cover; transform: translate3d(calc(-1.5px * var(--scale)), calc(-1.5px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(270deg);"> </div>
+
+                <div class="face" style="background: url(./images/enchanting_table_book_02.png); width: calc(1px * var(--scale)); height: calc(10px * var(--scale)); background-size: cover; transform: translate3d(calc(1px * var(--scale)), calc(0px * var(--scale)), calc(0px * var(--scale))) rotateX(90deg) rotateY(0deg);"> </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const DEBUG = false;
+
+    // LIVELY PROPERTIES (PENYIMPANAN PREFERENSI PENGGUNA)
+    function livelyPropertyListener(name, val) {
+        switch (name) {
+            case "booksize":
+                document.documentElement.style.setProperty('--scale', val);
+                requestAnimationFrame(Reposition);
+                break;
+            case "bookpos":
+                Array.from(document.getElementsByClassName("repos-parent")).forEach((el) => {
+                    el.setAttribute("rpos-y", val + "vh");
+                });
+                requestAnimationFrame(Reposition);
+                break;
+            case "bookspd":
+                document.documentElement.style.setProperty('--rotation-time', val);
+                break;
+        }
+    };
+
+    // EKSPERINMENTAL FITUR LivelyProperties DI BROWSER (BUKAN DI APLIKASI LIVELY WALLPAPER)
+    // fetch("LivelyProperties.json")
+    //     .then(res => res.json())
+    //     .then(c => {
+    //         livelyPropertyListener("booksize", c.booksize.value);
+    //         livelyPropertyListener("bookpos", c.bookpos.value);
+    //         livelyPropertyListener("bookspd", c.bookspd.value);
+    // });
+
+
+    const bookEle = document.getElementById("book");
+    const hoverEle = document.getElementById("hover");
+    const leftEle = document.getElementById("left-page");
+    const rightEle = document.getElementById("right-page");
+
+    let addSpinTimeOut;
+    hoverEle.addEventListener("mouseenter", () => {
+        // 1. Ambil posisi saat ini
+        const style = getComputedStyle(bookEle);
+
+        // 2. Tetapkan posisi saat ini sebagai nilai tetap
+        bookEle.style.transform = style.transform;
+
+        // 3. Atur class 
+        clearTimeout(addSpinTimeOut);
+        bookEle.classList.remove("spin");
+
+        // 4. Transisi
+        leftEle.style.transform = "rotateZ(-75deg)";
+        rightEle.style.transform = "rotateZ(75deg)";
+        bookEle.parentElement.classList.add("rotate-mouse-parent");
+        setTimeout(() => {
+            bookEle.style.transform = "rotateX(-30deg) rotateY(0deg) rotateZ(0deg)";
+        }, 33);
+    });
+    hoverEle.addEventListener("mouseout", () => {
+        
+        // leftEle.style.animation = "openleft 0.3s ease reserve";
+        // rightEle.style.animation = "openright 0.3s ease reserve";
+        leftEle.style.transform = "rotateZ(0deg)";
+        rightEle.style.transform = "rotateZ(0deg)";
+        bookEle.parentElement.classList.remove("rotate-mouse-parent")
+        bookEle.style.transform = "rotateX(-20deg) rotateY(0deg) rotateZ(0deg)";
+        addSpinTimeOut = setTimeout(() => {
+            bookEle.classList.add("spin");
+        }, 220);
+    });
+</script>
+<script src="Public/public.v1.1.js"></script>
+<script src="Public/rotmouse.v1.0.js"></script>
+<script>
+        setTimeout(() => {
+            bookEle.parentElement.classList.remove("rotate-mouse-parent")
+        }, 33);
+</script>
+</html>
