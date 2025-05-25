@@ -15,7 +15,7 @@ Repo ini berisi wallpaper web sederhana yang dinamis dan interaktif. Wallpaper i
 Kamu bisa meng-clone seluruh repo ini ke komputer kamu:
 
 ```bash
-git clone https://github.com/username/repo-wallpaper.git
+git clone https://github.com/kry137/wallpaper.git
 ```
 
 ### 2. Clone Repositori (Hanya Sebagian)
