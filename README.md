@@ -20,6 +20,4 @@ git clone https://github.com/kry137/wallpaper.git
 
 ### 2. Clone Repositori (Hanya Sebagian)
 
-```bash
-git clone https://kry137.github.io/wallpaper/
-```
+[https://kry137.github.io/wallpaper/](https://kry137.github.io/wallpaper/)
