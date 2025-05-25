@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Pets</title>
+    <link rel="stylesheet" href="Public/style.v1.1.css">
+    <style>
+        *{
+            image-rendering: pixelated;
+        }
+        #fog{
+            display: flex;
+            animation: fogmove 240s linear infinite;
+        }
+        @keyframes fogmove {
+            from {
+                transform: translateX(-50vw);
+            }
+            to {
+                transform: translateX(-150vw);
+            }
+        }
+        #foreground{
+            height: 100vh;
+            width: 100vw;
+            transform: scale(1.02);
+        }
+        #trees-1 {
+            transform: scale(1.005);
+        }
+        .parent-full{
+            /* position: absolute; */
+            /* z-index: 1; */
+            height: 100%;
+            width: 100%;
+        }
+        #pets-rotation-area{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20%;
+            top: 0;
+            
+            /* background-color: rgba(255, 0, 0, 0.4); */
+        }
+        #pets-rotation-area > *{
+            position: absolute;
+            bottom: 0;
+            /* width: 100px;
+            height: 100px; */
+        }
+        .pet{
+            transform-origin: 50% 100%;
+        }
+    </style>
+</head>
+<body>
+    <img id="background" src="images/background.png" class="absolute viewport-full" />
+    <div id="fog" class="absolute viewport-full">
+        <img src="images/background_fog.png" class="viewport-full" />
+        <img src="images/background_fog.png" class="viewport-full" />
+        <img src="images/background_fog.png" class="viewport-full" />
+    </div>
+    <img id="trees-0" src="images/trees_0.png" class="absolute viewport-full follow-mouse">
+    <img id="trees-1" src="images/trees_1.png" class="absolute viewport-full follow-mouse" fm-intensity="0.003">
+    <div id="foreground" class="absolute viewport-full follow-mouse" fm-intensity="0.01">
+        <img id="fore-back" class="absolute parent-full" src="images/foreground_back.png" />
+        <div id="pets-rotation-area">
+            <!-- CONTROLLED BY script.js -->
+        </div>
+        <img id="fore-ground" class="absolute parent-full" src="images/foreground_ground.png" />
+    </div>
+
+    <!-- <input type="text" name="" id="InputTest" style="position: absolute; z-index: 100; left: 0; bottom: 0;" value="bird;frog;bird"/> -->
+</body>
+<script> const DEBUG = false; </script>
+<script src="Public/public.v1.1.js"></script>
+<script src="Public/flwmouse.v1.1.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</html>

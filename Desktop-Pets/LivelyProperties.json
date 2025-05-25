@@ -1,0 +1,26 @@
+{
+    "pets": {
+        "type": "textbox",
+        "text": "Pets",
+        "help": "Control which pets appear and how often. Example: \"bird;frog;pig;sheep\".",
+        "value": "bird;frog;pig;sheep"
+    },
+    "speedmult": {
+        "max": 10,
+        "min": 0.1,
+        "step": 0.01,
+        "text": "Speed Multiplier",
+        "type": "slider",
+        "help": "Control the pets speed.",
+        "value": 1
+    },
+    "animspdmult": {
+        "max": 10,
+        "min": 0.1,
+        "step": 0.01,
+        "text": "Speed Multiplier",
+        "type": "slider",
+        "help": "Control the pets animation speed.",
+        "value": 1
+    }
+}

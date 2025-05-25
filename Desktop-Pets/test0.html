@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sprite Animation Test</title>
+  <style>
+    .sprite {
+      width: 24px; /* ukuran asli tiap frame */
+      height: 24px; /* ukuran asli tiap frame */
+      background-image: url(images/bird.png); /* contoh sprite sheet */
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      transform: scale(6.25); /* 100 / 16 */
+      transform-origin: top left;
+      image-rendering: pixelated; /* biar tetap tajam */
+    }
+
+    body {
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sprite" id="sprite"></div>
+
+  <script>
+    const sprite = document.getElementById("sprite");
+    const frameWidth = 24;
+    const frameCount = 4; // total frame
+    let currentFrame = 0;
+
+    setInterval(() => {
+      const offsetX = -currentFrame * frameWidth;
+      sprite.style.backgroundPosition = `${offsetX}px 0px`;
+      currentFrame = (currentFrame + 1) % frameCount;
+    }, 200); // ganti frame tiap 200ms
+  </script>
+
+</body>
+</html>
