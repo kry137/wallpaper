@@ -5,7 +5,7 @@ const petsData = {
   undefined: {
     animations: [0, 0],
     animationdelay: 100,
-    speed: 0,
+    speed: 1,
     sprite: "./images/sprites/undefined.png",
     spritesize: [16, 16],
   },
