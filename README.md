@@ -18,6 +18,6 @@ Kamu bisa meng-clone seluruh repo ini ke komputer kamu:
 git clone https://github.com/kry137/wallpaper.git
 ```
 
-### 2. Clone Repositori (Hanya Sebagian)
+### 2. Download Wallpaper (Hanya Sebagian)
 
 [https://kry137.github.io/wallpaper/](https://kry137.github.io/wallpaper/)
