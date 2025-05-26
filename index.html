@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wallpaper</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .item-card {
+            width: clamp(250px, 15vw, 400px);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .item-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 8px;
+            color: #333;
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: #666;
+            flex-grow: 1;
+        }
+
+        .item-link {
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        .item-link a {
+            color: #0066ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .item-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Wallpaper List</h1>
+
+    <div class="grid" id="itemsGrid">
+        <!-- Item cards akan diisi lewat JS -->
+    </div>
+
+    <script>
+        const items = [
+            {
+                title: "Jammy Jellyfish",
+                description: "A simple dynamic wallpaper featuring jellyfish that gracefully move following your mouse.",
+            },
+            {
+                title: "Enchantment Table",
+                description: "A simple Minecraft-themed wallpaper featuring a rotating Enchantment Table book that opens when the cursor gets near.",
+            },
+            {
+                title: "Desktop Pets",
+                description: "A simple pixel art wallpaper featuring several pet options that can walk around the screen.",
+            },
+        ];
+
+        const grid = document.getElementById('itemsGrid');
+
+        items.forEach(item => {
+            const card = document.createElement('div');
+            const target = item.title.replace(" ", "-")
+            card.className = 'item-card';
+
+            const image = target + "/preview.png"
+            const preview = target + "/"
+            const download = target + "/" + target + ".rar"
+
+            card.innerHTML = `
+      <img src="${image}" alt="${target}" class="item-image" />
+      <div class="item-content">
+        <h3 class="item-title">${item.title}</h3>
+        <p class="item-desc">${item.description}</p>
+        <div class="item-link">
+            <a href="${preview}" target="_blank" rel="noopener noreferrer">Preview</a>
+            <a href="${download}" download>Download</a>
+        </div>
+      </div>
+    `;
+
+            grid.appendChild(card);
+        });
+    </script>
+
+</body>
+
+</html>
