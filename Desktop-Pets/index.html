@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desktop Pets</title>
     <link rel="stylesheet" href="Public/style.v1.1.css">
     <style>
-        *{
+        * {
             image-rendering: pixelated;
         }
-        #fog{
+
+        #fog {
             display: flex;
             animation: fogmove 240s linear infinite;
         }
+
         @keyframes fogmove {
             from {
                 transform: translateX(-50vw);
             }
+
             to {
                 transform: translateX(-150vw);
             }
         }
-        #foreground{
+
+        #foreground {
             height: 100vh;
             width: 100vw;
             transform: scale(1.02);
         }
+
         #trees-1 {
             transform: scale(1.005);
         }
-        .parent-full{
+
+        .parent-full {
             /* position: absolute; */
             /* z-index: 1; */
             height: 100%;
             width: 100%;
         }
-        #pets-rotation-area{
+
+        #pets-rotation-area {
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 20%;
+            bottom: 21.9%;
             top: 0;
-            
+
             /* background-color: rgba(255, 0, 0, 0.4); */
         }
-        #pets-rotation-area > *{
+
+        #pets-rotation-area>* {
             position: absolute;
             bottom: 0;
             /* width: 100px;
             height: 100px; */
         }
-        .pet{
+
+        .pet {
             transform-origin: 50% 100%;
         }
     </style>
 </head>
+
 <body>
     <img id="background" src="images/background.png" class="absolute viewport-full" />
     <div id="fog" class="absolute viewport-full">
@@ -74,7 +85,7 @@
 
     <!-- <input type="text" id="InputTest" style="position: absolute; z-index: 100; left: 0; bottom: 0;" value="bird;frog;bird"/> -->
 </body>
-<script> const DEBUG = true; </script>
+<script> const DEBUG = new URLSearchParams(location.search).get("debug") ?? false; </script>
 <script src="Public/public.v1.1.js"></script>
 <script src="Public/flwmouse.v1.1.js"></script>
 <script src="data.js"></script>
