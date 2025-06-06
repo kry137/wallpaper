@@ -96,14 +96,17 @@
             {
                 title: "Jammy Jellyfish",
                 description: "A simple dynamic wallpaper featuring jellyfish that gracefully move following your mouse.",
+                debug: false,
             },
             {
                 title: "Enchantment Table",
                 description: "A simple Minecraft-themed wallpaper featuring a rotating Enchantment Table book that opens when the cursor gets near.",
+                debug: false,
             },
             {
                 title: "Desktop Pets",
                 description: "A simple pixel art wallpaper featuring several pet options that can walk around the screen.",
+                debug: true,
             },
         ];
 
@@ -111,11 +114,12 @@
 
         items.forEach(item => {
             const card = document.createElement('div');
-            const target = item.title.replace(" ", "-")
+            const target = item.title.replace(" ", "-");
+            const debugmode = item.debug;
             card.className = 'item-card';
 
             const image = target + "/preview.png"
-            const preview = target + "/index.html?debug=true"
+            const preview = target + "/index.html?debug=" + debugmode;
             const download = target + "/" + target + ".rar"
 
             card.innerHTML = `
