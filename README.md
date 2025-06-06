@@ -1,6 +1,6 @@
 # Dynamic Wallpaper Web
 
-Repo ini berisi wallpaper web sederhana yang dinamis dan interaktif. Wallpaper ini bisa digunakan sebagai latar belakang pada desktop atau aplikasi yang mendukung tampilan web sebagai wallpaper (contoh: Lively Wallpaper).
+Repo ini berisi wallpaper web sederhana yang dinamis dan interaktif. Wallpaper ini bisa digunakan sebagai latar belakang pada desktop (berbasis web), tetapi dukungan penuh terdapat pada Lively Wallpaper.
 
 ## Fitur
 
