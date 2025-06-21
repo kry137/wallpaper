@@ -4,22 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wallpaper</title>
+    <title>Wallpaper List</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f0f0;
             margin: 0;
             padding: 20px;
-        }
 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
         h1 {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .grid {
+        #items-card {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 30px;
             gap: 20px;
         }
 
@@ -87,7 +94,7 @@
 
     <h1>Wallpaper List</h1>
 
-    <div class="grid" id="itemsGrid">
+    <div id="items-card">
         <!-- Item cards akan diisi lewat JS -->
     </div>
 
@@ -110,7 +117,7 @@
             },
         ];
 
-        const grid = document.getElementById('itemsGrid');
+        const grid = document.getElementById('items-card');
 
         items.forEach(item => {
             const card = document.createElement('div');
