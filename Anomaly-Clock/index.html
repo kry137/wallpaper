@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anomaly Clock</title>
+  <style>
+    :root {
+      --bg-color: rgb(60, 60, 60);
+      --primary-color: rgb(180, 180, 180);
+      --clock-size: 150px;
+      --animation-duration: 0.4s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #clock > * {
+      position: absolute;
+    }
+
+    #center {
+      transform: translate(-50%, -50%);
+      background-color: var(--primary-color);
+      width: calc(var(--clock-size) * 0.07);
+      /* border: 2px solid var(--bg-color); */
+      border-radius: 100%;
+      aspect-ratio: 1 / 1;
+      z-index: 1000;
+    }
+
+    #border {
+      transform: translate(-50%, -50%);
+      border: 2px solid var(--primary-color);
+      border-radius: 100%;
+      width: calc(var(--clock-size) * 2);
+      aspect-ratio: 1 / 1;
+    }
+
+    #hours {
+      background-color: var(--primary-color);
+      width: calc(var(--clock-size) * 0.07);
+      height: calc(var(--clock-size) * 0.55);
+      transform: translate(-50%, -100%);
+      transform-origin: center bottom;
+      transition: transform var(--animation-duration) ease-in-out;
+      /* animation: spin 86400s linear infinite; */
+    }
+
+    #minutes {
+      background-color: var(--primary-color);
+      width: calc(var(--clock-size) * 0.07);
+      height: calc(var(--clock-size) * 0.75);
+      transform: translate(-50%, -100%);
+      transform-origin: center bottom;
+      transition: transform var(--animation-duration) ease-in-out;
+      /* animation: spin 3600s linear infinite; */
+    }
+
+    #seconds {
+      background-color: var(--primary-color);
+      width: calc(var(--clock-size) * 0.03);
+      height: calc(var(--clock-size) * 0.8);
+      transform: translate(-50%, -100%);
+      transform-origin: center bottom;
+      transition: transform var(--animation-duration) ease-in-out;
+      /* animation: spin 60s linear infinite; */
+    }
+
+    @keyframes spin {
+      from {
+        transform: translate(-50%, -100%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -100%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">
+    <div id="center"></div>
+    <div id="border"></div>
+    <div id="hours"></div>
+    <div id="minutes"></div>
+    <div id="seconds"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
