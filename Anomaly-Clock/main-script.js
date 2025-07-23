@@ -39,7 +39,7 @@ function SetRotation(ele, value, rotationValue = 1) {
     const rotateDirection = ele.getAttribute("data-rotate-direction") || "left"; // default to reverse if not set
 
     let newRotation = value * rotationValue * 360;
-    if (rotateDirection === "left") { newRotation -= 360; } // reverse the rotation for left direction
+    if (rotateDirection === "left") { newRotation -= 360; } // Comment this line to see what happens to the clock
 
     ele.style.transform = `translate(-50%, -100%) rotate(${newRotation}deg)`;
     ele.setAttribute("data-rotate-direction", (rotateDirection === "left" ? "right" : "left")); // toggle the rotation direction for next time
