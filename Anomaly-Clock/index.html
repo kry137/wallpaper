@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anomaly Clock</title>
   <style>
+    @font-face {
+      font-family: 'Montserrat Semibold';
+      src: url('font/Montserrat-Semibold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+
     :root {
       --bg-color: rgb(60, 60, 60);
       --primary-color: rgb(180, 180, 180);
       --clock-size: 150px;
       --animation-duration: 0.4s;
+      --flip-clock-size: 30px;
     }
 
     * {
@@ -18,13 +27,29 @@
     }
 
     body {
-      background-color: var(--bg-color);
+      font-family: 'Montserrat Semibold';
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100vw;
       height: 100vh;
+      color: var(--primary-color);
+      background-color: var(--bg-color);
+      gap: 20px;
       overflow: hidden;
+    }
+
+    .nums-row{
+      transition: transform var(--animation-duration) ease-in-out; 
+    }
+
+    .nums-row>*{
+      height: var(--flip-clock-size);
+    }
+
+    #clock {
+      margin: calc(var(--clock-size));
     }
 
     #clock > * {
@@ -79,24 +104,78 @@
       /* animation: spin 60s linear infinite; */
     }
 
-    @keyframes spin {
-      from {
-        transform: translate(-50%, -100%) rotate(0deg);
-      }
-      to {
-        transform: translate(-50%, -100%) rotate(360deg);
-      }
+    #time{
+      display: flex;
+      flex-direction: row;
+      /* transform: translateX(-50%); */
+      height: var(--flip-clock-size);
+      font-size: var(--flip-clock-size);
+      overflow: hidden;
+      padding-bottom: calc(var(--flip-clock-size) * 0.1);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      /* background-color: red; */
+      /* gap: 1em; */
     }
+
+    .line{
+      position: absolute;
+      width: calc(var(--clock-size) * 0.1);
+      height: 2px;
+      margin-left: calc(var(--clock-size) * 0.9);
+      transform-origin: calc(var(--clock-size) * -0.9) center;
+      background-color: var(--primary-color);
+    }
+
+    #line-1  { transform: rotate(30deg); }
+    #line-2  { transform: rotate(60deg); }
+    #line-3  { transform: rotate(90deg); }
+    #line-4  { transform: rotate(120deg); }
+    #line-5  { transform: rotate(150deg); }
+    #line-6  { transform: rotate(180deg); }
+    #line-7  { transform: rotate(210deg); }
+    #line-8  { transform: rotate(240deg); }
+    #line-9  { transform: rotate(270deg); }
+    #line-10 { transform: rotate(300deg); }
+    #line-11 { transform: rotate(330deg); }
+    #line-12 { transform: rotate(360deg); }
   </style>
 </head>
 <body>
+  <div id="time" class="">
+    <div id="hour-1" class="nums-row">012</div>
+    <div id="hour-2" class="nums-row">0123456789</div>
+    <p>:</p>
+    <div id="minute-1" class="nums-row">0123456</div>
+    <div id="minute-2" class="nums-row">0123456789</div>
+    <p>:</p>
+    <div id="second-1" class="nums-row">0123456</div>
+    <div id="second-2" class="nums-row">0123456789</div>
+  </div>
   <div id="clock">
     <div id="center"></div>
     <div id="border"></div>
     <div id="hours"></div>
     <div id="minutes"></div>
     <div id="seconds"></div>
+    <div id="styles">
+      <div id="lines">
+        <div id="line-1" class="line"></div>
+        <div id="line-2" class="line"></div>
+        <div id="line-3" class="line"></div>
+        <div id="line-4" class="line"></div>
+        <div id="line-5" class="line"></div>
+        <div id="line-6" class="line"></div>
+        <div id="line-7" class="line"></div>
+        <div id="line-8" class="line"></div>
+        <div id="line-9" class="line"></div>
+        <div id="line-10" class="line"></div>
+        <div id="line-11" class="line"></div>
+        <div id="line-12" class="line"></div>
+      </div>
+    </div>
   </div>
-  <script src="script.js"></script>
+  <script src="preparement-script.js"></script>
+  <script src="main-script.js"></script>
 </body>
 </html>
