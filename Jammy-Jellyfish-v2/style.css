@@ -1,0 +1,13 @@
+* {
+    position: absolute;
+    width: 101vw;
+    height: 101vh;
+}
+
+body {
+    overflow: hidden;
+}
+body>* {
+        left: -.5vw;
+        top: -.5vh;
+}

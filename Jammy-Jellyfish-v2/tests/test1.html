@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jammy Jellyfish</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="Jammy-Jellyfish_WP_2560x1440 (0).png">
+    <img src="Jammy-Jellyfish_WP_2560x1440 (1).png">
+    <canvas id="canv"></canvas>
+</body>
+<script>
+    const canvas = document.getElementById('canv');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const dots = [];
+    // Tambahkan event listener untuk klik
+    canvas.addEventListener('click', function (event) {
+        // Dapatkan posisi relatif mouse terhadap canvas
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        // Simpan posisi klik
+        dots.push([x, y]);
+        console.log("Klik di posisi:", x, y);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Bersihkan
+
+        // Gambar lingkaran kecil di posisi klik
+        dots.forEach(dot => {
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(dot[0], dot[1], 5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Gambarsegitiga sesuai titik
+        for (let i = 0; i < dots.length; i++) {
+            if (i < 2) continue; // Butuh setidaknya 3 titik untuk membuat segitiga
+
+            // console.log("Segitiga:", i-2);
+
+            const a = dots[i - 2];
+            const b = dots[i - 1];
+            const c = dots[i];
+
+            // console.log(a, b, c);
+
+            ctx.beginPath()
+            ctx.moveTo(a[0], a[1])
+            ctx.lineTo(b[0], b[1])
+            ctx.lineTo(c[0], c[1])
+            ctx.closePath();
+            ctx.fillStyle = 'red';
+            ctx.fill();
+        };
+    });
+
+</script>
+
+</html>

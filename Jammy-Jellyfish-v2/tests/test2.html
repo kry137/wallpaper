@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dapatkan setiap titik-titiknya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="https://wallpapercave.com/wp/wp11830871.jpg">
+    <canvas id="canv"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canv');
+        const ctx = canvas.getContext('2d');
+
+        const dots = [];
+        const dots2 = [];
+
+        // Titik virtual
+        let virtualX = window.innerWidth / 2;
+        let virtualY = window.innerHeight / 2;
+
+        function windowResize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            drawAll();
+        }
+        window.addEventListener("resize", windowResize);
+        windowResize();
+
+        function drawCircle(pos, color = "red", radius = 3) {
+            ctx.beginPath();
+            ctx.arc(pos[0], pos[1], radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawAll() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Gambar semua titik yang disimpan
+            dots.forEach(dot => drawCircle(dot, "red", 3));
+
+            // Gambar titik virtual
+            drawCircle([virtualX, virtualY], "yellow", 3);
+        }
+
+        // Mouse click
+        canvas.addEventListener('click', (e) => {
+            dots.push([e.clientX, e.clientY]);
+            dots2.push([e.clientX / window.innerWidth, e.clientY / window.innerHeight]);
+            drawAll();
+            console.log(dots);
+            console.log(dots2);
+        });
+
+        // Keyboard controls
+        window.addEventListener('keydown', (e) => {
+            const step = 2;
+
+            if (e.key === 'ArrowUp') virtualY -= step;
+            else if (e.key === 'ArrowDown') virtualY += step;
+            else if (e.key === 'ArrowLeft') virtualX -= step;
+            else if (e.key === 'ArrowRight') virtualX += step;
+
+            else if (e.key === 'Enter' || e.key === ' ') {
+                dots.push([virtualX, virtualY]);
+                dots2.push([virtualX / window.innerWidth, virtualY / window.innerHeight]);
+                console.log(dots);
+                console.log(dots2);
+            }
+
+            else if (e.key === 'Backspace') {
+                dots.pop();
+                dots2.pop();
+            }
+
+            drawAll();
+        });
+
+
+    </script>
+</body>
+
+</html>

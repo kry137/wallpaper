@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="a">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus officiis temporibus necessitatibus iusto
+        minus pariatur voluptatem error tempora earum, voluptate nesciunt architecto adipisci accusantium recusandae?
+        Commodi animi quo reprehenderit aperiam.</p>
+</body>
+<script>
+    function startEaseLoop(onUpdate, duration = 1000) {
+        let startTime = performance.now();
+
+        function easeInOut(t) {
+            // Fungsi easing: ease-in-out (menggunakan fungsi sinus)
+            return 0.5 * (1 - Math.cos(Math.PI * t));
+        }
+
+        function loop(now) {
+            const elapsed = (now - startTime) % duration;
+            const progress = elapsed / duration;
+
+            // Ubah progress jadi naik turun: 0 -> 1 -> 0
+            const cycleProgress = progress < 0.5
+                ? progress * 2           // 0 → 1
+                : 2 - progress * 2;      // 1 → 0
+
+            const eased = easeInOut(cycleProgress);
+            onUpdate(eased);
+
+            requestAnimationFrame(loop);
+        }
+
+        requestAnimationFrame(loop);
+    }
+
+
+    const a = document.getElementById('a');
+    startEaseLoop((val) => {
+        a.style.transform = `translateY(${val * 100}px)`
+    }, 2000); // durasi satu siklus naik turun = 2 detik
+
+</script>
+
+</html>
