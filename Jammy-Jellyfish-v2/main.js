@@ -1,4 +1,14 @@
 //#region VARIABLES
+
+const animDuration = 2000; // MILISECONDS
+const targetFPS = 60;
+const jellyfishMovement = 2;
+const cachingDelay = 0;
+
+const headPointsAbs = [];
+const tentaclesPointsAbs = [];
+const cached = [];
+
 const canvas = document.getElementById('canv');
 const ctx = canvas.getContext('2d');
 const headPointsV = [
@@ -175,7 +185,6 @@ const headPointsV = [
         0.4322916666666667
     ]
 ]
-const headPointsAbs = []
 const tentaclesPointsV = [
     [
         [
@@ -768,7 +777,6 @@ const tentaclesPointsV = [
         ]
     ],
 ]
-const tentaclesPointsAbs = []
 
 const head = [
     { color: '#89306A', points: [0, 1, 2, 3, 4, 5] },
@@ -884,7 +892,7 @@ const tentacles = [
         { color: '#B05C84', points: [21, 22, 23] },
     ],
     [
-        { color: '#4E0937', points: [0, 1, 2, 3] },
+        { color: '#4E0937', points: [0, 1, 2, 6, 3] },
         { color: '#7E315D', points: [3, 4, 5, 6] },
         { color: '#631446', points: [6, 2, 10, 9, 5] },
         { color: '#9A4A7A', points: [4, 5, 7] },
@@ -907,7 +915,7 @@ const tentacles = [
 function setHeadAbs(targetX = 1, targetY = 1) {
     // Remove all datas first
     tentaclesPointsAbs.length = 0;
-    
+
     // Refill data, multiply they with the target value
     headPointsV.forEach((coor, i) => {
         const [x, y] = coor;
@@ -924,7 +932,7 @@ function setTentAbs(targetX = 1, targetY = 1) {
 
         tentaclesPointsAbs[i] = []; // Initialize
         tentacle.forEach((coor, j) => {
-            const [ x, y ] = coor;
+            const [x, y] = coor;
             tentaclesPointsAbs[i][j] = [x * targetX, y * targetY];
         });
 
@@ -935,12 +943,15 @@ setTentAbs();
 //#endregion SET VARIABLE tentaclesPointsAbs
 
 //#region HANDLE CANVAS RESIZE
-function setCanvas(){
-    const windowX = window.innerWidth;
-    const windowY = window.innerHeight;
+let windowX, windowY;
+function setCanvas() {
+    windowX = window.innerWidth;
+    windowY = window.innerHeight;
 
     canvas.width = windowX;
     canvas.height = windowY;
+
+    cached.length = 0;
 
     setHeadAbs(windowX, windowY);
     setTentAbs(windowX, windowY);
@@ -949,37 +960,58 @@ window.addEventListener('resize', setCanvas)
 setCanvas()
 //#endregion HANDLE CANVAS RESIZE
 
-const easeAnim = createEaseLoop(1700); // SET JELLYFISH ANIMATION HERE
-const jellyfishMovement = 1;
-function drawJellyfish(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+let currFrame = 0;
+let increase = 1;
+const totalFPS = (animDuration / 1000) * targetFPS;
 
-    //#region TENTACLES
-    // ANIMATION
-    const newTentaclesPoints = tentaclesPointsAbs.map((group) => {
-        return group.map(([x, y], i) => {
-            const scale = easeAnim.value * jellyfishMovement * i;
+function drawJellyfish() {
+
+    if (!cached[currFrame]) {
+        // CREATE NEW CANVAS
+        const newCanv = document.createElement('canvas');
+        const context = newCanv.getContext('2d');
+        newCanv.width = windowX;
+        newCanv.height = windowY
+
+        //#region TENTACLES
+        for (let i = 0; i < tentacles.length; i++) {
+            // ANIMATION
+            const easeValue = easeVal(totalFPS, currFrame);
+            const tentacleAbs = tentaclesPointsAbs[i];
+            const toDraw = tentacleAbs.map(([x, y], j) => {
+                const scale = easeValue * jellyfishMovement * j;
+                return [x + scale, y + scale];
+            });
+            // ADD TO NEW CANVAS
+            drawShapesFrSample(context, toDraw, tentacles[i]);
+        }
+        //#endregion TENTACLES
+
+        //#region HEAD
+        // ANIMATION
+        const easeValue = easeVal(totalFPS, currFrame);
+        const toDraw = headPointsAbs.map(([x, y]) => {
+            const scale = easeValue * jellyfishMovement * -3;
             return [x + scale, y + scale];
         });
-    });
-    // DRAW TO CANVAS
-    for (let i = 0; i < tentacles.length; i++) {
-        drawShapesFrSample(newTentaclesPoints[i], tentacles[i], 5);
-        if (DEBUG) newTentaclesPoints[i].forEach((tentacle, j) => drawCircle(tentacle, j, "white", 6))
+        // ADD TO NEW CANVAS
+        drawShapesFrSample(context, toDraw, head);
+        //#endregion HEAD
+
+        // ADD THE NEW CANVAS TO CACHED AREA
+        cached[currFrame] = newCanv;
+        return setTimeout(drawJellyfish, cachingDelay);
     }
-    //#endregion TENTACLES
     
-    //#region HEAD
-    // ANIMATION
-    const newHeadPoints = headPointsAbs.map(([x, y]) => {
-        const scale = easeAnim.value * jellyfishMovement * -2;
-        return [x + scale, y + scale];
-    });
-    // DRAW TO CANVAS
-    drawShapesFrSample(newHeadPoints, head);
-    if (DEBUG) newHeadPoints.forEach((e, i) => drawCircle(e, i, "white", 8));
-    //#endregion HEAD
-    
+    // DRAW CACHED CANVAS TO MAINCANVAS
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(cached[currFrame], 0, 0);
+
+    // PREPARE FOR NEXT LOOP
+    currFrame += increase;
+    if (currFrame <= 0) increase = 1;
+    if (currFrame >= totalFPS) increase = -1;
+
     requestAnimationFrame(drawJellyfish)
 }
 drawJellyfish()
